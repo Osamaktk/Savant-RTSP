@@ -1,18 +1,25 @@
 services:
-
   video-loop-source:
     image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
     restart: unless-stopped
     volumes:
       - zmq_sockets:/tmp/zmq-sockets
-      - /tmp/video-loop-source-downloads:/tmp/video-loop-source-downloads
     environment:
-      - LOCATION=https://eu-central-1.linodeobjects.com/savant-data/demo/lpr_test_1080p.mp4
-      - DOWNLOAD_PATH=/tmp/video-loop-source-downloads
       - ZMQ_ENDPOINT=dealer+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      # Configure 10 RTSP input streams
+      - LOCATION_0=rtsp://camera1:554/stream
+      - LOCATION_1=rtsp://camera2:554/stream
+      - LOCATION_2=rtsp://camera3:554/stream
+      - LOCATION_3=rtsp://camera4:554/stream
+      - LOCATION_4=rtsp://camera5:554/stream
+      - LOCATION_5=rtsp://camera6:554/stream
+      - LOCATION_6=rtsp://camera7:554/stream
+      - LOCATION_7=rtsp://camera8:554/stream
+      - LOCATION_8=rtsp://camera9:554/stream
+      - LOCATION_9=rtsp://camera10:554/stream
       - SOURCE_ID=video
-      - SYNC_OUTPUT=True
-    entrypoint: /opt/savant/adapters/gst/sources/video_loop.sh
+      - SYNC_OUTPUT=False
+    entrypoint: /opt/savant/adapters/gst/sources/multistream.sh
     depends_on:
       module:
         condition: service_healthy
