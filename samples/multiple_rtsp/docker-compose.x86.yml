@@ -28,6 +28,118 @@ services:
       module:
         condition: service_healthy
 
+  rtsp-stream3:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream3
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream3
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
+  rtsp-stream4:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream4
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream4
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
+  rtsp-stream5:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream5
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream5
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
+  rtsp-stream6:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream6
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream6
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
+  rtsp-stream7:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream7
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream7
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
+  rtsp-stream8:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream8
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream8
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
+  rtsp-stream9:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream9
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream9
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
+  rtsp-stream10:
+    image: ghcr.io/insight-platform/savant-adapters-gstreamer:latest
+    restart: unless-stopped
+    volumes:
+      - zmq_sockets:/tmp/zmq-sockets
+    environment:
+      - RTSP_URI=rtsp://your-rtsp-server:8554/stream10
+      - ZMQ_ENDPOINT=pub+connect:ipc:///tmp/zmq-sockets/input-video.ipc
+      - SOURCE_ID=stream10
+    entrypoint: /opt/savant/adapters/gst/sources/rtsp.sh
+    depends_on:
+      module:
+        condition: service_healthy
+
   module:
     image: ghcr.io/insight-platform/savant-deepstream:latest
     restart: unless-stopped
@@ -63,7 +175,7 @@ services:
       - ../assets/stub_imgs:/stub_imgs
     environment:
       - ZMQ_ENDPOINT=sub+connect:ipc:///tmp/zmq-sockets/output-video.ipc
-      - SOURCE_IDS=city-traffic,town-centre
+      - SOURCE_IDS=city-traffic,town-centre,stream3,stream4,stream5,stream6,stream7,stream8,stream9,stream10
       - FRAMERATE=25/1
       - STUB_FILE_LOCATION=/stub_imgs/smpte100_1280x720.jpeg
       - DEV_MODE=True
